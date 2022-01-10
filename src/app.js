@@ -14,7 +14,7 @@ const {  SECREAT } = require('./conf/constants')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-const userAPIRouter = require('./routes/users')
+const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 
 // error handler，在页面中显示

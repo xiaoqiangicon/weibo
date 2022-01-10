@@ -36,8 +36,5 @@
     "redis": "^4.0.1",
     "sequelize": "^6.12.4",
     "supertest": "^6.1.6"
-  },
-  "pre-commit": [
-    "lint"
-  ]
+  }
 }

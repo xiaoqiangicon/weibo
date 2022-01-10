@@ -1,8 +1,10 @@
 /**
  * @description user service
+ * 数据处理和格式化
  */
 
 const { User } = require('../db/model/index');
+const { formateUser } = require('./_format')
 
 /**
  * 获取用户信息
@@ -29,9 +31,9 @@ async function getUserInfo(userName, password) {
   }
 
   // 格式化
-  
+  const formatRes = formateUser(result.dataValues)
 
-  return result.dataValues;
+  return formatRes;
 }
 
 module.exports = {
