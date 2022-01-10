@@ -2,7 +2,7 @@
  * @description 存储配置
  * @author lee
  */
-const env = process.env.NODE_ENV  // 环境变量；
+const env = process.env.NODE_ENV || 'dev'  // 环境变量；
 
 // 配置
 let MYSQL_CONF

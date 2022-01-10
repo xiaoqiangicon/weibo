@@ -7,11 +7,14 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
+const jwtKoa = require('koa-jwt')
 
 const { REDIS_CONF } = require('./conf/db')
+const {  SECREAT } = require('./conf/constants')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const userAPIRouter = require('./routes/users')
 const errorViewRouter = require('./routes/view/error')
 
 // error handler，在页面中显示
@@ -20,6 +23,13 @@ onerrorConf = {
   redirect: '/error'
 }
 onerror(app, onerrorConf)
+
+// jwt 配置
+// app.use(jwtKoa({
+//   secret: SECREAT,
+// }).unless({
+//   path: [/^\/users\/login/] // 自定义哪些目录忽略jwt验证
+// }))
 
 // middlewares, post的数据转换;
 app.use(bodyparser({
@@ -60,6 +70,7 @@ app.use(session({
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404路由注册到最下面
 
 // error-handling，控制台报错
