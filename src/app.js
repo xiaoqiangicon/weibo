@@ -10,7 +10,7 @@ const redisStore = require('koa-redis')
 const jwtKoa = require('koa-jwt')
 
 const { REDIS_CONF } = require('./conf/db')
-const {  SECREAT } = require('./conf/constants')
+const {  JWT_SECREAT_KEY, SESSION_SECREATE_KEY } = require('./conf/constant')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -26,7 +26,7 @@ onerror(app, onerrorConf)
 
 // jwt 配置
 // app.use(jwtKoa({
-//   secret: SECREAT,
+//   secret: JWT_SECREAT_KEY,
 // }).unless({
 //   path: [/^\/users\/login/] // 自定义哪些目录忽略jwt验证
 // }))
@@ -44,7 +44,7 @@ app.use(views(__dirname + '/views', { // 注册一个ejs
 }))
 
 // session 配置,加密密匙
-app.keys = ['lee']
+app.keys = [SESSION_SECREATE_KEY]
 app.use(session({
   key: 'weibo.sid', // cookie name, 默认koa.sid
   prefix: 'webo:sess:', // redis key的前缀，默认koa:sess:

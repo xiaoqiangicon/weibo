@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const util = require('util')
 const verify = util.promisify(jwt.verify)
 
-const {  SECREAT } = require('../conf/constants')
+const {  SECREAT } = require('../conf/constant')
 router.prefix('/users')
 
 router.get('/', function (ctx, next) {

@@ -29,8 +29,6 @@ const User = seq.define('user', {
   },
   picture: {
     type: STRING,
-    allowNull: false,
-    comment: '存储的是图片地址'
   },
   city: {
     type: STRING,
