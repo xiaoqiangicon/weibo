@@ -3,7 +3,7 @@
  * 主要负责业务逻辑和返回格式
  */
 
-const { getUserInfo, createUser } = require('../service/user');
+const { getUserInfo, createUser, deleteUser } = require('../service/user');
 const { SuccessModel, ErrorModel } = require('../model/ResModel');
 const { registerUserNameNotExistInfo, failInfo, nickNameExist, loginFail } = require('../model/ErrorInfo')
 const { doCrypto } = require('../utils/cryp');
@@ -75,8 +75,24 @@ async function login(ctx, userName, password) {
   return new SuccessModel({userInfo});
 }
 
+// 删除当前用户
+async function deleteCurUser(userName) {
+  // service
+  const result = await deleteUser();
+
+  if (result) {
+    return new SuccessModel();
+  }
+  // 失败
+  return new ErrorModel({
+    error: -1,
+    message: '删除用户失败',
+  })
+}
+
 module.exports = {
   isExist,
   register,
   login,
+  deleteCurUser,
 }
