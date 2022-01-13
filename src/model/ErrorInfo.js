@@ -18,5 +18,9 @@ module.exports = {
     validatorFail: {
         errno: -1,
         message: '验证出错了',
+    },
+    loginFail: {
+        errno: -1,
+        message: '登陆失败',
     }
 }
