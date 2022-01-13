@@ -7,8 +7,16 @@ module.exports = {
         errno: -1,
         message: '用户名不存在',
     },
+    nickNameExist: {
+        errno: -1, 
+        message: '用户名已存在',
+    },
     failInfo: {
         errno: -1,
         message: '统一错误提示'
+    },
+    validatorFail: {
+        errno: -1,
+        message: '验证出错了',
     }
 }
