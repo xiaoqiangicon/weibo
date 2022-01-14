@@ -8,6 +8,8 @@ const logger = require('koa-logger')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 const jwtKoa = require('koa-jwt')
+const koaStatic = require('koa-static')
+const path = require('path')
 
 const { REDIS_CONF } = require('./conf/db')
 const {  JWT_SECREAT_KEY, SESSION_SECREATE_KEY } = require('./conf/constant')
@@ -37,7 +39,8 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public')) // public当作静态资源的方式访问
+app.use(koaStatic(__dirname + '/public')) // public当作静态资源的方式访问
+app.use(koaStatic(path.join(__dirname, '..', 'uploadFiles')))
 
 app.use(views(__dirname + '/views', { // 注册一个ejs
   extension: 'ejs'
