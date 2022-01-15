@@ -2,12 +2,19 @@
  * @description utils controller
  */
 
-const { ErrorModel } = require("../model/ResModel")
+const { ErrorModel, SuccessModel } = require("../model/ResModel")
 const fse = require('fs-extra');
 const path = require('path');
 
 // 存储目录
 const DIST_FOLDER_PATH = path.join(__dirname, '..', '..', 'uploadFiles');
+
+// 是否需要创建目录
+fse.pathExists(DIST_FOLDER_PATH).then(exist => {
+  if (!exist) {
+    fse.ensureDir(DIST_FOLDER_PATH);
+  }
+})
 
 // 文件最大体积是1M
 const MAX_SIZE = 500 * 1024 * 1024
@@ -27,7 +34,9 @@ async function saveFile({name, type, size, filePath}) {
   await fse.move(filePath, distFilePath);
 
   // 返回信息
-  
+  return new SuccessModel({
+    url: '/' + fileName
+  })
 }
 
 
