@@ -3,7 +3,7 @@
  * 主要负责业务逻辑和返回格式
  */
 
-const { getUserInfo, createUser, deleteUser } = require('../service/user');
+const { getUserInfo, createUser, deleteUser, updateUser } = require('../service/user');
 const { SuccessModel, ErrorModel } = require('../model/ResModel');
 const { registerUserNameNotExistInfo, failInfo, nickNameExist, loginFail } = require('../model/ErrorInfo')
 const { doCrypto } = require('../utils/cryp');
@@ -90,9 +90,34 @@ async function deleteCurUser(userName) {
   })
 }
 
+// 修改个人信息；
+async function changeInfo (ctx, {nickName, city, picture}) {
+  const { userName } = ctx.session.userInfo;
+  if (!nickName) {
+    nickName = userName;
+  }
+  // service
+  const result = await updateUser({newNickName: nickName, newCity: city, newPicture: picture}, {userName});
+
+  if (result) {
+    // 修改成功
+    Object.assign(ctx.session.userInfo, {
+      nickName,
+      city,
+      picture
+    })
+    return new SuccessModel();
+  }
+  return new ErrorModel({
+    errno: -1,
+    message: '修改信息失败'
+  })
+}
+
 module.exports = {
   isExist,
   register,
   login,
   deleteCurUser,
+  changeInfo,
 }
