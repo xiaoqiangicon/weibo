@@ -55,4 +55,3 @@ test('登陆应该成功', async() => {
   expect(res.body.errno.errno).toBe(0);
   cookie = res.headers['set-cookie'].join(',');
 })
-
