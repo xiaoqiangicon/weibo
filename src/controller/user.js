@@ -114,10 +114,37 @@ async function changeInfo (ctx, {nickName, city, picture}) {
   })
 }
 
+// 修改密码
+async function changePassword(userName, password, newPassword) {
+  const result = await updateUser({
+    newPassword: doCrypto(newPassword)
+  }, {
+    userName,
+    password: doCrypto(password)
+  })
+
+  if (result) {
+    // 成功
+    return new SuccessModel();
+  } 
+
+  return new ErrorModel({
+    errno: -1,
+    message: '修改密码失败'
+  })
+}
+
+async function logout(ctx) {
+  delete ctx.session.userInfo;
+  return new SuccessModel();
+}
+
 module.exports = {
   isExist,
   register,
   login,
   deleteCurUser,
   changeInfo,
+  changePassword,
+  logout,
 }
