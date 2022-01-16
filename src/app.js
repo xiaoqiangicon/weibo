@@ -19,6 +19,7 @@ const users = require('./routes/users')
 const userAPIRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 const utilsAPIRouter = require('./routes/api/utils')
+const blogHomeAPIRouter = require('./routes/api/blog-home')
 
 // error handler，在页面中显示
 let onerrorConf = {}
@@ -76,6 +77,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())
+app.use(blogHomeAPIRouter.routes(), blogHomeAPIRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404路由注册到最下面
 
 // error-handling，控制台报错
