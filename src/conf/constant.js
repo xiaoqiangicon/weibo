@@ -7,4 +7,5 @@ module.exports = {
     JWT_SECREAT_KEY: 'jwtScreat',
     CRYPTO_SECREATE_KEY: 'LEE',
     SESSION_SECREATE_KEY: '',
+    PAGE_SIZE: 5,
 }

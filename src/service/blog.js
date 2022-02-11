@@ -1,7 +1,7 @@
 /**
  * @description 关于微博的增删改查service
  */
-const { Blog } = require('../db/model/index');
+const { Blog, User } = require('../db/model/index');
 const { formateUser } = require('./_format')
 
 async function createBlog({ userId, content, image}) {
@@ -15,7 +15,7 @@ async function createBlog({ userId, content, image}) {
 }
 
 async function getBlogListByUser(
-    { userName, pageIndex = 0, pageSize = 10}
+    { userName, pageIndex = 0, pageSize = 5}
 ) {
     // 拼接查询条件
     const whereOpts = {}
